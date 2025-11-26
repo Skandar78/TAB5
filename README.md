@@ -220,6 +220,18 @@ http://IP_DE_LA_TAB5/
 * L’état est synchronisé instantanément avec la Tab5
 ---
 
+# ✅ Difficultés rencontrées
+
+* Utilisation de la bibliothèque **M5Unified**, encore récente et partiellement documentée, entraînant plusieurs incompatibilités (écran, son, touches, layout dynamique).
+* Problèmes de **synchronisation des WebSockets** entre la tablette et la page web (état du son, alarme, graphes).
+* Gestion de l’écran tactile en portrait avec un **layout 1280×720**, nécessitant des recalculs complets des coordonnées.
+* Nécessité de filtrer les valeurs du capteur IR pour éviter les faux positifs, ce qui a entraîné la création d’un **filtrage logiciel (sensibilité réglable)**.
+* Débogage du bouton “SON ON/OFF”, qui ne synchronisait pas correctement l’état entre la tablette et l’interface web.
+* Problème initial d’erreur de compilation (ex. `'function' does not name a type'`), dû à des conflits dans le code JavaScript intégré dans la chaîne HTML/C++.
+* Ralentissement de la Tab5 à cause du **redessin complet de l’écran** (graph + historique + dashboard) → optimisation du rafraîchissement nécessaire.
+* Instabilité WiFi ponctuelle lorsque plusieurs fenêtres web étaient ouvertes → besoin d’améliorer la gestion des WebSocket.
+
+
 # 🏆 Auteur
 
 **Skandar – Étudiant SNPI 5 – Projet Edge Computing Tab5**
