@@ -15,7 +15,64 @@ Ce projet met en œuvre un **système autonome de détection de présence** bas�
 L’ensemble fonctionne **sans cloud**, uniquement en réseau local WiFi.
 
 ---
+🔧 Matériel & Type de Capteur
+🧱 Matériel
 
+1 × M5Stack Tab5 (ESP32-S3, écran tactile)
+
+1 × capteur IR digital de proximité (type “obstacle avoidance”, sortie DIGITALE)
+
+Quelques fils Dupont / borniers selon le montage
+
+Réseau WiFi (box ou hotspot)
+
+📟 Type de capteur IR
+
+Le projet utilise un capteur IR digital :
+
+Sortie : DIGITALE (0 ou 1)
+
+Logique utilisée dans le code :
+
+LOW (0) = présence détectée (PROCHE)
+
+HIGH (1) = pas de détection (LOIN)
+
+Le capteur est lu avec pinMode(IR_PIN, INPUT_PULLUP); → la Tab5 active une résistance de pull-up interne.
+
+➜ Concrètement : quand quelque chose passe devant le capteur, sa sortie est tirée à 0 (LOW)
+ce qui est interprété comme “PROCHE”.
+
+🔌 Câblage et Ports utilisés
+🧷 Broches Tab5 utilisées
+
+Dans le code, on a :
+
+const int IR_PIN = 1;
+
+
+Sur la Tab5, cela correspond à la broche G1 (GPIO 1).
+
+🧬 Connexions à réaliser
+
+Capteur IR digital → Tab5 :
+
+VCC du capteur → 3.3V de la Tab5
+
+GND du capteur → GND de la Tab5
+
+OUT du capteur → G1 de la Tab5 (GPIO 1)
+
+⚠ Important : alimenter le capteur en 3.3V, pas en 5V, pour être sûr de rester dans les niveaux logiques compatibles.
+
+Dans le code :
+
+const int IR_PIN = 1;          // GPIO 1 = G1 sur la Tab5
+...
+pinMode(IR_PIN, INPUT_PULLUP);
+...
+bool newRaw = (digitalRead(IR_PIN) == LOW);  // LOW = détection
+---
 # 📡 **Fonctionnalités Principales**
 
 ### 🔍 Détection IR
