@@ -15,64 +15,66 @@ Ce projet met en œuvre un **système autonome de détection de présence** bas�
 L’ensemble fonctionne **sans cloud**, uniquement en réseau local WiFi.
 
 ---
-🔧 Matériel & Type de Capteur
-🧱 Matériel
 
-1 × M5Stack Tab5 (ESP32-S3, écran tactile)
+## 🔧 Matériel & Type de Capteur
 
-1 × capteur IR digital de proximité (type “obstacle avoidance”, sortie DIGITALE)
+### 🧱 Matériel
 
-Quelques fils Dupont / borniers selon le montage
+* 1 × **M5Stack Tab5** (ESP32-S3, écran tactile)
+* 1 × **capteur IR digital de proximité** (type “obstacle avoidance”, sortie **DIGITALE**)
+* Quelques fils Dupont / borniers selon le montage
+* Réseau WiFi (box ou hotspot)
 
-Réseau WiFi (box ou hotspot)
+### 📟 Type de capteur IR
 
-📟 Type de capteur IR
+Le projet utilise un **capteur IR digital** :
 
-Le projet utilise un capteur IR digital :
+* Sortie : **DIGITALE** (0 ou 1)
+* Logique utilisée dans le code :
 
-Sortie : DIGITALE (0 ou 1)
+  * **LOW (0)** = présence détectée (**PROCHE**)
+  * **HIGH (1)** = pas de détection (**LOIN**)
+* Le capteur est lu avec `pinMode(IR_PIN, INPUT_PULLUP);` → la Tab5 active une résistance de pull-up interne.
 
-Logique utilisée dans le code :
+> ➜ Concrètement : quand quelque chose passe devant le capteur, sa sortie est tirée à 0 (LOW)
+> ce qui est interprété comme “PROCHE”.
 
-LOW (0) = présence détectée (PROCHE)
+---
 
-HIGH (1) = pas de détection (LOIN)
+## 🔌 Câblage et Ports utilisés
 
-Le capteur est lu avec pinMode(IR_PIN, INPUT_PULLUP); → la Tab5 active une résistance de pull-up interne.
-
-➜ Concrètement : quand quelque chose passe devant le capteur, sa sortie est tirée à 0 (LOW)
-ce qui est interprété comme “PROCHE”.
-
-🔌 Câblage et Ports utilisés
-🧷 Broches Tab5 utilisées
+### 🧷 Broches Tab5 utilisées
 
 Dans le code, on a :
 
+```cpp
 const int IR_PIN = 1;
+```
 
+Sur la Tab5, cela correspond à la **broche G1** (GPIO 1).
 
-Sur la Tab5, cela correspond à la broche G1 (GPIO 1).
-
-🧬 Connexions à réaliser
+### 🧬 Connexions à réaliser
 
 Capteur IR digital → Tab5 :
 
-VCC du capteur → 3.3V de la Tab5
+* **VCC du capteur** → **3.3V** de la Tab5
+* **GND du capteur** → **GND** de la Tab5
+* **OUT du capteur** → **G1** de la Tab5 (GPIO 1)
 
-GND du capteur → GND de la Tab5
-
-OUT du capteur → G1 de la Tab5 (GPIO 1)
-
-⚠ Important : alimenter le capteur en 3.3V, pas en 5V, pour être sûr de rester dans les niveaux logiques compatibles.
+> ⚠ Important : alimenter le capteur en **3.3V**, pas en 5V, pour être sûr de rester dans les niveaux logiques compatibles.
 
 Dans le code :
 
+```cpp
 const int IR_PIN = 1;          // GPIO 1 = G1 sur la Tab5
 ...
 pinMode(IR_PIN, INPUT_PULLUP);
 ...
 bool newRaw = (digitalRead(IR_PIN) == LOW);  // LOW = détection
+```
+
 ---
+
 # 📡 **Fonctionnalités Principales**
 
 ### 🔍 Détection IR
@@ -217,6 +219,15 @@ http://IP_DE_LA_TAB5/
 * Boutons RESET et SON ON/OFF
 * L’état est synchronisé instantanément avec la Tab5
 ---
+Bien vu, tu as raison, il manque deux infos importantes pour ton prof :
+
+* **quel capteur exactement**
+* **quel port / broches utiliser sur la Tab5**
+
+Je te redonne un **README complet** avec ces deux points bien expliqués (type de capteur + câblage / port).
+
+---
+
 
 # 🏆 Auteur
 
