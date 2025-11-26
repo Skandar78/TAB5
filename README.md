@@ -219,15 +219,6 @@ http://IP_DE_LA_TAB5/
 * Boutons RESET et SON ON/OFF
 * L’état est synchronisé instantanément avec la Tab5
 ---
-Bien vu, tu as raison, il manque deux infos importantes pour ton prof :
-
-* **quel capteur exactement**
-* **quel port / broches utiliser sur la Tab5**
-
-Je te redonne un **README complet** avec ces deux points bien expliqués (type de capteur + câblage / port).
-
----
-
 
 # 🏆 Auteur
 
